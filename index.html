@@ -66,3 +66,71 @@
 //     console.log(data);
 // }
 // apidata()
+
+// // curry
+function subwayorder(bread, patty, cheese){
+    console.log(`MY bread ${bread} with patty ${patty} and ${cheese}`);
+}
+subwayorder("multigrain", "aloo", "cheese");
+
+
+function subwayorder1(bread){
+    return function (patty){
+        return function (cheese){
+            console.log(`MY bread ${bread} with patty ${patty} and ${cheese}`);
+            // return `MY bread ${bread} with patty ${patty} and ${cheese}`;
+        }
+    }
+}
+subwayorder1("multigrain")("aloo")("cheese");
+
+// // eventlisteners
+const container1 = document.getElementById('container1');
+
+container1.addEventListener('click', () => {
+    console.log('Container 1 clicked');
+})
+
+// // EVENT BUBBLING AND CAPTURING
+const grandParent = document.getElementById("grandparent");
+const parent = document.getElementById("parent");
+const child = document.getElementById("child");
+
+// // Event Bubbling -- BOTTOM TO TOP
+grandParent.addEventListener("click",()=>{
+    console.log("RED DIV CALLLED");
+})
+parent.addEventListener("click",()=>{
+    console.log("GREEN DIV CALLLED");
+})
+child.addEventListener("click",()=>{
+    console.log("BLUE DIV CALLLED");
+})
+
+// Event Capturing -- TOP TO BOTTOM
+grandParent.addEventListener("click",()=>{
+    console.log("RED DIV CALLLED");
+},true);    
+parent.addEventListener("click",()=>{
+    console.log("GREEN DIV CALLLED");
+},true);
+child.addEventListener("click",()=>{
+    console.log("BLUE DIV CALLLED");
+},true);
+
+// // Event Delegation -- using parent element to handle events for child elements
+const unorderedList = document.getElementById("navBar");
+unorderedList.addEventListener("click", (event) => {
+  if (event.target.tagName === "LI") {
+    console.log(event.target.textContent);
+  }
+});
+
+// Lets add new item 
+const newItem = document.createElement("li");
+newItem.innerText="Logout";
+unorderedList.appendChild(newItem);
+
+// append and appendChild -- diifference
+// append() can take multiple nodes or strings, while appendChild() can only take a single node.
+// append() can also take text content, while appendChild() cannot.
